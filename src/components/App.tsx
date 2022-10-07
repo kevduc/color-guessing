@@ -3,7 +3,7 @@ import styles from './App.module.scss'
 import ColorDisplay from '@/components/ColorDisplay'
 import ColorButton from '@/components/ColorButton'
 import Score from '@/components/Score'
-import NextIcon from '@/components/NextIcon'
+import NextButton from '@/components/NextButton'
 
 import type { HexColor } from '@/utils'
 import { randomColors, randomInt } from '@/utils'
@@ -69,7 +69,7 @@ function App() {
     <main className={styles.main}>
       <ColorDisplay ref={colorDisplayRef} color={trueColor}>
         <Score value={score} />
-        {canGoToNextColorQuestion && <NextIcon />}
+        {canGoToNextColorQuestion && <NextButton />}
       </ColorDisplay>
       <div className={styles.buttons}>
         {colorChoices &&
