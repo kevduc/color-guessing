@@ -87,7 +87,7 @@ function App() {
               isAnswer={color === trueColor}
             />
           ))}
-        {score === 0 && <TutorialInfo />}
+        {score === 0 && userColorAnswer === null && <TutorialInfo />}
       </div>
     </main>
   )
