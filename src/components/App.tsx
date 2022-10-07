@@ -19,10 +19,11 @@ function App() {
 
   const colorDisplayRef = useRef<HTMLElement>(null)
 
-  const trueColor = (colorChoices !== null && trueColorId !== null && colorChoices[trueColorId]) || null
+  const trueColor = colorChoices !== null && trueColorId !== null ? colorChoices[trueColorId] : null
   const revealed = userColorAnswer !== null
 
-  const getNumChoicesBasedOnScore = (score: number): number => Math.min(2 + Math.floor(score / 10), 8)
+  const getNumChoicesBasedOnScore = (score: number): number =>
+    score === 0 ? 1 : score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8)
 
   const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null)
