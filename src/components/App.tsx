@@ -20,7 +20,7 @@ function App() {
   const trueColor = (colorChoices !== null && trueColorId !== null && colorChoices[trueColorId]) || null
   const revealed = userColorAnswer !== null
 
-  const getNumChoicesBasedOnScore = (score: number): number => (score < 5 ? 2 : Math.min(3 + Math.floor(score / 10), 7))
+  const getNumChoicesBasedOnScore = (score: number): number => Math.min(2 + Math.floor(score / 10), 8)
 
   const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null)
