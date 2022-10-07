@@ -27,10 +27,20 @@
 @media (min-width: 768px) {
   .main {
     max-height: 700px;
+
+    grid-template-rows: 1fr;
+
+    & > * {
+      grid-row: 1;
+      grid-column: 1;
+    }
   }
 
   .buttons {
     flex-direction: row;
     --max-font-size: 2rem;
+
+    z-index: 1;
+    align-content: center;
   }
 }

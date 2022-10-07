@@ -56,6 +56,17 @@
   outline: 0.18em solid rgba(42, 180, 104, 0.85);
 }
 
+@media (min-width: 768px) {
+  .correct-answer,
+  .unpicked-correct-answer {
+    transition: outline 400ms ease-in-out, background-color 400ms ease-in-out, border-color 400ms ease-in-out,
+      box-shadow 400ms ease-in-out;
+    border-color: transparent;
+    box-shadow: none;
+    outline: transparent;
+  }
+}
+
 @keyframes shake {
   0%,
   100% {
