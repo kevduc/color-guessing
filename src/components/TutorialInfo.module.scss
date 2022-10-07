@@ -1,7 +1,7 @@
 .pointer {
   position: absolute;
-  animation: 1000ms ease-in-out forwards go, 3000ms ease-in-out 800ms infinite click;
-  bottom: 0;
+  animation: 3800ms ease-in-out infinite forwards click;
+  bottom: 25%;
   right: 0;
   translate: 72% 100%;
   font-size: 2rem;
@@ -9,37 +9,48 @@
   color: black;
 }
 
-@keyframes go {
+@keyframes click {
   0% {
     opacity: 0;
   }
-  25% {
+  7% {
     opacity: 0.3;
   }
-  50% {
+  13% {
     opacity: 1;
+  }
+  21% {
+    scale: 1;
+  }
+  26% {
+    bottom: 50%;
+    right: 50%;
+  }
+  33% {
+    scale: 0.9;
+  }
+  35% {
+    rotate: x 0deg;
+  }
+  42% {
+    rotate: x 40deg;
+  }
+  53% {
+    rotate: x 0deg;
+    scale: 0.9;
+  }
+  68% {
+    scale: 1;
+  }
+  84% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0;
   }
   100% {
     bottom: 50%;
     right: 50%;
-  }
-}
-
-@keyframes click {
-  15% {
-    scale: 0.9;
-  }
-  20% {
-    rotate: x 0deg;
-  }
-  30% {
-    rotate: x 40deg;
-  }
-  40% {
-    rotate: x 0deg;
-    scale: 0.9;
-  }
-  60% {
-    scale: 1;
+    opacity: 0;
   }
 }
