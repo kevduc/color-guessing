@@ -1,0 +1,98 @@
+.color-button {
+  background-color: #6b6b6b;
+  color: inherit;
+  padding: 0.5em 1em;
+
+  font-size: 1em;
+  font-family: monospace;
+
+  border-radius: 0.5em;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.5);
+
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px rgb(0 0 0 / 40%);
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #838383;
+  }
+
+  &:active {
+    background-color: #575757;
+  }
+
+  &:disabled {
+    cursor: auto;
+  }
+
+  transition: outline 50ms ease-in-out;
+}
+
+.correct-answer {
+  outline: 0.18em solid rgba(42, 180, 65, 0.85);
+  animation: 300ms ease-in-out jump;
+
+  position: relative;
+
+  &::after {
+    content: '+1';
+    font-size: 1.1em;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    animation: 700ms ease-out forwards bonus;
+  }
+}
+
+.wrong-answer {
+  outline: 0.18em solid rgba(180, 42, 42, 0.85);
+  animation: 300ms ease-in-out shake;
+}
+
+.unpicked-correct-answer {
+  outline: 0.18em solid rgba(42, 180, 104, 0.85);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    translate: 0em;
+  }
+  20%,
+  60% {
+    translate: -0.2em;
+  }
+  40%,
+  80% {
+    translate: 0.2em;
+  }
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+  50% {
+    translate: 0 -0.5em;
+    scale: 1.1;
+  }
+}
+
+@keyframes bonus {
+  0% {
+    top: 30%;
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    top: -80%;
+    opacity: 0;
+  }
+}
