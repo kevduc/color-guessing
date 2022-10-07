@@ -1,69 +1,45 @@
 .color-button {
-  background-color: #6b6b6b;
-  color: inherit;
-  padding: 0.5em 1em;
-
+  transition: outline 50ms ease-in-out, background-color 100ms ease-in-out;
   font-size: 1em;
   font-family: monospace;
+  animation: 1000ms ease-in-out forwards text-appear, 500ms ease-in-out forwards appear;
 
-  border-radius: 0.5em;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.5);
+  &.correct-answer {
+    outline: 0.18em solid rgba(42, 180, 65, 0.85);
+    animation: 300ms ease-in-out jump;
 
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px rgb(0 0 0 / 40%);
+    position: relative;
 
-  cursor: pointer;
-
-  &:hover {
-    background-color: #838383;
+    &::after {
+      content: '+1';
+      font-size: 1.1em;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      animation: 700ms ease-out forwards bonus;
+    }
   }
 
-  &:active {
-    background-color: #575757;
+  &.wrong-answer {
+    outline: 0.18em solid rgba(180, 42, 42, 0.85);
+    animation: 300ms ease-in-out shake;
   }
 
-  &:disabled {
-    cursor: auto;
+  &.unpicked-correct-answer {
+    outline: 0.18em solid rgba(42, 180, 104, 0.85);
   }
 
-  transition: outline 50ms ease-in-out, background-color 100ms ease-in-out;
-}
-
-.correct-answer {
-  outline: 0.18em solid rgba(42, 180, 65, 0.85);
-  animation: 300ms ease-in-out jump;
-
-  position: relative;
-
-  &::after {
-    content: '+1';
-    font-size: 1.1em;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    animation: 700ms ease-out forwards bonus;
-  }
-}
-
-.wrong-answer {
-  outline: 0.18em solid rgba(180, 42, 42, 0.85);
-  animation: 300ms ease-in-out shake;
-}
-
-.unpicked-correct-answer {
-  outline: 0.18em solid rgba(42, 180, 104, 0.85);
-}
-
-@media (min-width: 768px) {
-  .correct-answer,
-  .unpicked-correct-answer {
-    transition: outline 400ms ease-in-out, background-color 400ms ease-in-out, border-color 400ms ease-in-out,
-      box-shadow 400ms ease-in-out;
-    border-color: transparent;
-    box-shadow: none;
-    outline: transparent;
+  @media (min-width: 768px) {
+    &.correct-answer,
+    &.unpicked-correct-answer {
+      transition: outline 400ms ease-in-out, background-color 400ms ease-in-out, border-color 400ms ease-in-out,
+        box-shadow 400ms ease-in-out;
+      border-color: transparent;
+      box-shadow: none;
+      outline: transparent;
+    }
   }
 }
 
@@ -105,5 +81,29 @@
   100% {
     top: -80%;
     opacity: 0;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes text-appear {
+  0% {
+    color: rgba(255, 255, 255, 0);
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 00), 0px 0px 5px rgb(0 0 0 / 0%);
+  }
+
+  50% {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  100% {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px rgb(0 0 0 / 40%);
   }
 }

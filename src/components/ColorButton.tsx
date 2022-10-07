@@ -14,7 +14,7 @@ interface ColorButtonProps {
 const ColorButton: FunctionComponent<ColorButtonProps> = ({ onClick, color, revealed, picked, isAnswer, ...rest }) => {
   return (
     <button
-      className={`${styles['color-button']} ${
+      className={`button ${styles['color-button']} ${
         picked
           ? isAnswer
             ? styles['correct-answer']

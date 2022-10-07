@@ -1,0 +1,26 @@
+.button {
+  color: inherit;
+  padding: 0.5em 1em;
+
+  border-radius: 0.5em;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), inset 0 0 5px rgba(50, 50, 50, 0.2);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px rgb(0 0 0 / 40%);
+
+  background-color: #6b6b6b;
+  transition: background-color 100ms ease-in-out;
+
+  &:hover {
+    background-color: #838383;
+  }
+
+  &:active {
+    background-color: #575757;
+  }
+
+  &:disabled {
+    cursor: auto;
+  }
+
+  cursor: pointer;
+}
