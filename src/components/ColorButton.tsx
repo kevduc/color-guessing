@@ -25,7 +25,7 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({ onClick, color, reve
             : ''
           : ''
       }`}
-      style={(revealed && { backgroundColor: color }) || undefined}
+      style={revealed ? { backgroundColor: color } : undefined}
       onClick={(e) => onClick(color)}
       disabled={revealed}
       {...rest}>

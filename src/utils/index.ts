@@ -9,5 +9,7 @@ const randomColor = (): HexColor =>
 
 const randomColors = (numColors: number) => new Array(numColors).fill(null).map(() => randomColor())
 
-export { randomColor, randomColors, randomInt }
+const clamp = (min: number, x: number, max: number) => Math.max(min, Math.min(x, max))
+
+export { randomColor, randomColors, randomInt, clamp }
 export type { HexColor }

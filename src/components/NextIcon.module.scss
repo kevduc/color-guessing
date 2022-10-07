@@ -1,0 +1,43 @@
+.next-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  &::after {
+    content: '➡';
+    display: block;
+    font-size: clamp(10em, 25vw, 15em);
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 3px rgb(0 0 0 / 40%);
+    cursor: pointer;
+    animation: 5200ms ease-in-out forwards appear;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    scale: 1;
+  }
+  4% {
+    opacity: 0.7;
+    scale: 1.15;
+  }
+  8% // 400ms
+  {
+    opacity: 1;
+    scale: 1;
+  }
+  90% {
+    // opacity: 0.3;
+    scale: 1;
+  }
+  95% {
+    // opacity: 0.8;
+    scale: 1.15;
+  }
+  100% {
+    // opacity: 0;
+    scale: 0;
+  }
+}

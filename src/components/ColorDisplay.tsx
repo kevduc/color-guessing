@@ -6,8 +6,8 @@ interface ColorDisplayProps {
   [key: string]: any
 }
 
-const ColorDisplay: FunctionComponent<ColorDisplayProps> = ({ color, ...rest }) => {
-  return <div className={styles.display} style={{ backgroundColor: color ?? 'transparent' }} {...rest}></div>
+const ColorDisplay: FunctionComponent<ColorDisplayProps> = ({ color, children, ...rest }) => {
+  return <div className={styles.display} style={{ backgroundColor: color ?? 'transparent' }} {...rest}>{children}</div>
 }
 
 export default ColorDisplay
