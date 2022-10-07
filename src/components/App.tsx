@@ -19,17 +19,28 @@ function App() {
 
   const trueColor = (colorChoices !== null && trueColorId !== null && colorChoices[trueColorId]) || null
   const revealed = userColorAnswer !== null
-  const numChoices = Math.min(3 + Math.floor((score + 1) / 10), 7)
 
-  const newColorQuestion = () => {
+  const getNumChoicesBasedOnScore = (score: number): number => (score < 5 ? 2 : Math.min(3 + Math.floor(score / 10), 7))
+
+  const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null)
     setColorChoices(randomColors(numChoices))
     setTrueColorId(randomInt(0, numChoices - 1))
   }
 
-  useEffect(newColorQuestion, [])
+  useEffect(() => newColorQuestion(getNumChoicesBasedOnScore(score)), [])
 
-  const nextColorQuestionAfterTimeout = () => {
+  const handleColorButtonClick = (color: HexColor) => {
+    let newScore = score // to get updated numChoices for next question
+
+    if (color === trueColor) {
+      setScore((score) => score + 1)
+      newScore++
+    }
+
+    setUserColorAnswer(color)
+
+    // next color question after timeout
     setTimeout(() => {
       setCanGoToNextColorQuestion(true)
       let timeout: NodeJS.Timeout
@@ -37,17 +48,11 @@ function App() {
         clearTimeout(timeout)
         setCanGoToNextColorQuestion(false)
         document.removeEventListener<'click'>('click', nextColor)
-        newColorQuestion()
+        newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
       timeout = setTimeout(nextColor, 5000)
       document.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
     }, 1000)
-  }
-
-  const handleColorButtonClick = (color: HexColor) => {
-    if (color === trueColor) setScore((score) => score + 1)
-    setUserColorAnswer(color)
-    nextColorQuestionAfterTimeout()
   }
 
   return (
