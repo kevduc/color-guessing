@@ -1,3 +1,26 @@
+.color-component {
+  transition: background-color 200ms ease-in-out;
+  border-radius: 1000px;
+  display: inline-block;
+
+  &:not(.none) {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &.hide-all-on-hover,
+  .color-button:hover &.all-on-hover,
+  &.individual-on-hover:hover,
+  &.hide-individual-on-hover {
+    background-color: var(--component-background-color);
+  }
+
+  .color-button:hover &.hide-all-on-hover,
+  &.hide-individual-on-hover:hover {
+    background-color: transparent;
+  }
+}
+
 .color-button {
   transition: outline 50ms ease-in-out, background-color 100ms ease-in-out;
   font-size: 1em;

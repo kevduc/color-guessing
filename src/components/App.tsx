@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useRef, useState } from 'react'
 import styles from './App.module.scss'
 import ColorDisplay from '@/components/ColorDisplay'
+import type { ColorComponentsDisplay } from '@/components/ColorButton'
 import ColorButton from '@/components/ColorButton'
 import Score from '@/components/Score'
 import NextButton from '@/components/NextButton'
@@ -18,7 +19,7 @@ function App() {
   const [userColorAnswer, setUserColorAnswer] = useState<HexColor | null>(null)
   const [score, setScore] = useState<number>(0)
 
-  const [canGoToNextColorQuestion, setCanGoToNextColorQuestion] = useState(false)
+  const [canGoToNextColorQuestion, setCanGoToNextColorQuestion] = useState<boolean>(false)
 
   const colorDisplayRef = useRef<HTMLElement>(null)
 
@@ -27,6 +28,12 @@ function App() {
 
   const getNumChoicesBasedOnScore = (score: number): number =>
     score === 0 ? 1 : score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8)
+  const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDisplay =>
+    score < 15 ? 'hide-all-on-hover' : score < 25 ? 'all-on-hover' : score < 35 ? 'individual-on-hover' : 'none'
+
+  const [colorComponentsDisplay, setColorComponentsDisplay] = useState<ColorComponentsDisplay>(
+    getColorComponentsDisplayBasedOnScore(score)
+  )
 
   const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null)
@@ -48,8 +55,8 @@ function App() {
     let newScore = score // to get updated numChoices for next question
 
     if (color === trueColor) {
-      setScore((score) => score + 1)
       newScore++
+      setScore((score) => score + 1)
     }
 
     setUserColorAnswer(color)
@@ -62,6 +69,7 @@ function App() {
         clearTimeout(timeout)
         setCanGoToNextColorQuestion(false)
         colorDisplayRef.current?.removeEventListener<'click'>('click', nextColor)
+        setColorComponentsDisplay(getColorComponentsDisplayBasedOnScore(newScore))
         newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
       timeout = setTimeout(nextColor, AUTO_NEXT_TIMEOUT)
@@ -85,6 +93,7 @@ function App() {
               revealed={revealed}
               picked={color === userColorAnswer}
               isAnswer={color === trueColor}
+              colorComponentsDisplay={colorComponentsDisplay}
             />
           ))}
         {score === 0 && userColorAnswer === null && <TutorialInfo />}
