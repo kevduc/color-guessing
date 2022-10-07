@@ -17,7 +17,8 @@
   background-color: transparent;
   border: none;
 
-  animation: 5200ms ease-in-out forwards appear;
+  --animation-length: 5000ms; // default
+  animation: calc(200ms + var(--animation-length)) ease-in-out forwards appear;
 
   &::after {
     position: absolute;
