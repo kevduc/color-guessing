@@ -13,6 +13,7 @@
 }
 
 .buttons {
+  position: relative;
   display: flex;
   gap: 0.85rem;
   justify-content: center;
@@ -24,7 +25,7 @@
 }
 
 @media (max-width: 767px) {
-  .buttons > :last-child {
+  .buttons > button:last-of-type {
     margin-bottom: 5vw;
   }
 }

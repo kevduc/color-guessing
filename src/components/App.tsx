@@ -4,6 +4,7 @@ import ColorDisplay from '@/components/ColorDisplay'
 import ColorButton from '@/components/ColorButton'
 import Score from '@/components/Score'
 import NextButton from '@/components/NextButton'
+import TutorialInfo from '@/components/TutorialInfo'
 
 import type { HexColor } from '@/utils'
 import { randomColors, randomInt } from '@/utils'
@@ -84,6 +85,7 @@ function App() {
               isAnswer={color === trueColor}
             />
           ))}
+        {score === 0 && <TutorialInfo />}
       </div>
     </main>
   )
