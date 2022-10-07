@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './App.module.scss'
 import ColorDisplay from '@/components/ColorDisplay'
 import ColorButton from '@/components/ColorButton'
@@ -16,6 +16,8 @@ function App() {
   const [score, setScore] = useState<number>(0)
 
   const [canGoToNextColorQuestion, setCanGoToNextColorQuestion] = useState(false)
+
+  const colorDisplayRef = useRef<HTMLElement>(null)
 
   const trueColor = (colorChoices !== null && trueColorId !== null && colorChoices[trueColorId]) || null
   const revealed = userColorAnswer !== null
@@ -55,17 +57,17 @@ function App() {
       const nextColor = () => {
         clearTimeout(timeout)
         setCanGoToNextColorQuestion(false)
-        document.removeEventListener<'click'>('click', nextColor)
+        colorDisplayRef.current?.removeEventListener<'click'>('click', nextColor)
         newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
       timeout = setTimeout(nextColor, 5000)
-      document.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
+      colorDisplayRef.current?.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
     }, 600)
   }
 
   return (
     <main className={styles.main}>
-      <ColorDisplay color={trueColor}>
+      <ColorDisplay ref={colorDisplayRef} color={trueColor}>
         <Score value={score} />
         {canGoToNextColorQuestion && <NextIcon />}
       </ColorDisplay>
