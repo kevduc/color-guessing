@@ -28,16 +28,15 @@ body,
 #root {
   margin: 0;
   height: 100%;
+  width: 100%;
 }
 
 #root {
   display: grid;
   place-items: center;
-}
+  padding: 5vw;
 
-/* @media (prefers-color-scheme: light) {
-  :root {
-    --color: #213547;
-    --background-color: #ffffff;
+  @media (max-width: 767px) {
+    padding-bottom: 0;
   }
-} */
+}
