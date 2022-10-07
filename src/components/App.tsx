@@ -30,6 +30,14 @@ function App() {
 
   useEffect(() => newColorQuestion(getNumChoicesBasedOnScore(score)), [])
 
+  useEffect(() => {
+    const requestFullscreen = () => document.documentElement.requestFullscreen()
+    document.addEventListener('dblclick', requestFullscreen)
+    return () => {
+      document.removeEventListener('dblclick', requestFullscreen)
+    }
+  }, [])
+
   const handleColorButtonClick = (color: HexColor) => {
     let newScore = score // to get updated numChoices for next question
 
