@@ -60,7 +60,7 @@ function App() {
       }
       timeout = setTimeout(nextColor, 5000)
       document.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
-    }, 1000)
+    }, 600)
   }
 
   return (
