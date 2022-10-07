@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import styles from './App.module.scss'
 import ColorDisplay from '@/components/ColorDisplay'
 import ColorButton from '@/components/ColorButton'
@@ -8,6 +8,8 @@ import TutorialInfo from '@/components/TutorialInfo'
 
 import type { HexColor } from '@/utils'
 import { randomColors, randomInt } from '@/utils'
+
+const AUTO_NEXT_TIMEOUT = 8000 // ms
 
 function App() {
   const [colorChoices, setColorChoices] = useState<HexColor[] | null>(null)
@@ -62,7 +64,7 @@ function App() {
         colorDisplayRef.current?.removeEventListener<'click'>('click', nextColor)
         newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
-      timeout = setTimeout(nextColor, 5000)
+      timeout = setTimeout(nextColor, AUTO_NEXT_TIMEOUT)
       colorDisplayRef.current?.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
     }, 600)
   }
@@ -71,7 +73,7 @@ function App() {
     <main className={styles.main}>
       <ColorDisplay ref={colorDisplayRef} color={trueColor}>
         <Score value={score} />
-        {canGoToNextColorQuestion && <NextButton />}
+        {canGoToNextColorQuestion && <NextButton style={{ '--animation-length': `${AUTO_NEXT_TIMEOUT}ms` } as CSSProperties} />}
       </ColorDisplay>
       <div className={styles.buttons}>
         {colorChoices &&
