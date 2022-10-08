@@ -2,7 +2,22 @@ import type { HexColor } from '@/utils'
 import { CSSProperties, FunctionComponent } from 'react'
 import styles from './ColorButton.module.scss'
 
-type ColorComponentsDisplay = 'hide-all-on-hover' | 'all-on-hover' | 'hide-individual-on-hover' | 'individual-on-hover' | 'none' 
+/* For each color component, 3 possible display mode:
+ * - show: show by default, and hide on hover
+ * - hide: hide by default, and show on hover
+ * - none: don't display at all
+ * */
+type ColorComponentDisplayMode = 'show' | 'hide' | 'none' // TODO: implement
+type ColorComponentsDisplay =
+  | 'hide-all-on-hover'
+  | 'all-on-hover'
+  | 'hide-individual-on-hover'
+  | 'individual-on-hover'
+  | 'none'
+  | 'show-random-2' // TODO: implement
+  | 'show-random-1' // TODO: implement
+  | 'hide-random-2' // TODO: implement
+  | 'hide-random-1' // TODO: implement
 
 interface ColorButtonProps {
   onClick: (color: HexColor) => void
@@ -51,7 +66,9 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
         rgbValues[i] = 255
         return (
           <span
-            className={`${styles['color-component']} ${styles[colorComponentsDisplay]}`}
+            className={`${styles['color-component']} ${
+              styles[revealed && colorComponentsDisplay !== 'none' ? 'hide-all-on-hover' : colorComponentsDisplay]
+            }`} // TODO: force to 'hide-all-on-hover' if revealed?
             style={{ '--component-background-color': `rgba(${rgbValues.join(',')},${value / 255})` } as CSSProperties}>
             {component}
           </span>
