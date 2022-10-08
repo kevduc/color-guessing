@@ -30,9 +30,10 @@ function App() {
     score === 0 ? 1 : score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8)
   const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDisplay =>
     score < 15 ? 'hide-all-on-hover' : score < 25 ? 'all-on-hover' : score < 35 ? 'individual-on-hover' : 'none' // TODO: update to include new modes e.g. "show-random-2"
-  // TODO: extract to json file
+  // TODO: extract levels to json file
   // TODO: add animated "Level Up! ⬆" when difficulty changes
   // TODO: add instructions when behavior changes (e.g. on tactile: long press on button to reveal colors)
+  // TODO: add sound effects
 
   const [colorComponentsDisplay, setColorComponentsDisplay] = useState<ColorComponentsDisplay>(
     getColorComponentsDisplayBasedOnScore(score)
