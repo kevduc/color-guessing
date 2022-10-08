@@ -76,7 +76,7 @@ function App() {
         setColorComponentsDisplay(getColorComponentsDisplayBasedOnScore(newScore))
         newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
-      timeout = setTimeout(nextColor, AUTO_NEXT_TIMEOUT)
+      // timeout = setTimeout(nextColor, AUTO_NEXT_TIMEOUT)
       colorDisplayRef.current?.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
     }, 600)
   }
