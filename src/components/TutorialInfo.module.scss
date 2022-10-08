@@ -7,6 +7,10 @@
   font-size: 2rem;
   pointer-events: none;
   color: black;
+
+  @media (min-width: 767px) {
+    --right-adjustment: 
+  }
 }
 
 @keyframes click {
