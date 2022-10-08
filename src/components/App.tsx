@@ -27,7 +27,7 @@ function App() {
   const revealed = userColorAnswer !== null
 
   const getNumChoicesBasedOnScore = (score: number): number =>
-    score === 0 ? 1 : score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8)
+    score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8)
   const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDisplay =>
     score < 15 ? 'hide-all-on-hover' : score < 25 ? 'all-on-hover' : score < 35 ? 'individual-on-hover' : 'none' // TODO: update to include new modes e.g. "show-random-2"
   // TODO: extract levels to json file
@@ -42,7 +42,7 @@ function App() {
   const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null)
     setColorChoices(randomColors(numChoices))
-    setTrueColorId(randomInt(0, numChoices - 1))
+    setTrueColorId(score === 0 ? 1 : randomInt(0, numChoices - 1))
   }
 
   useEffect(() => newColorQuestion(getNumChoicesBasedOnScore(score)), [])
