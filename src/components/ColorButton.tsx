@@ -45,7 +45,7 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
 
   return (
     <button
-      className={`button ${styles['color-button']} ${
+      className={`button ${styles['color-button']} ${styles[colorComponentsDisplay]} ${
         picked
           ? isAnswer
             ? styles['correct-answer']

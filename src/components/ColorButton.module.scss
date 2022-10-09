@@ -6,6 +6,7 @@
   &:not(.none) {
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 0.1em; // TODO: keep padding if not all components are none e.g.: .color-button:has(:not(&.none)) &.none
   }
 
   &.always,
@@ -27,6 +28,10 @@
   font-size: 1em;
   font-family: monospace;
   animation: 1000ms ease-in-out forwards text-appear, 500ms ease-in-out forwards appear;
+
+  &:not(.none) {
+    padding: 0.3em 0.4em !important;
+  }
 
   &.correct-answer {
     outline: 0.18em solid rgba(42, 180, 65, 0.85);
