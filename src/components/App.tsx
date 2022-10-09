@@ -10,8 +10,6 @@ import TutorialInfo from '@/components/TutorialInfo'
 import type { HexColor } from '@/utils'
 import { randomColors, randomInt } from '@/utils'
 
-const AUTO_NEXT_TIMEOUT = 8000 // ms
-
 function App() {
   const [colorChoices, setColorChoices] = useState<HexColor[] | null>(null)
   const [trueColorId, setTrueColorId] = useState<number | null>(null)
@@ -65,19 +63,16 @@ function App() {
 
     setUserColorAnswer(color)
 
-    // next color question after timeout
+    // allow next color question after timeout
     setTimeout(() => {
       setCanGoToNextColorQuestion(true)
-      let timeout: NodeJS.Timeout
       const nextColor = () => {
-        clearTimeout(timeout)
         setCanGoToNextColorQuestion(false)
         colorDisplayRef.current?.removeEventListener<'click'>('click', nextColor)
         setColorComponentsDisplay(getColorComponentsDisplayBasedOnScore(newScore))
         newColorQuestion(getNumChoicesBasedOnScore(newScore))
       }
-      // timeout = setTimeout(nextColor, AUTO_NEXT_TIMEOUT)
-      colorDisplayRef.current?.addEventListener<'click'>('click', nextColor) // allow user to skip timeout
+      colorDisplayRef.current?.addEventListener<'click'>('click', nextColor)
     }, 600)
   }
 
@@ -85,7 +80,7 @@ function App() {
     <main className={styles.main}>
       <ColorDisplay ref={colorDisplayRef} color={trueColor}>
         <Score value={score} />
-        {canGoToNextColorQuestion && <NextButton style={{ '--animation-length': `${AUTO_NEXT_TIMEOUT}ms` } as CSSProperties} />}
+        {canGoToNextColorQuestion && <NextButton />}
       </ColorDisplay>
       <div className={styles.buttons}>
         {colorChoices &&
