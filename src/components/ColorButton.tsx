@@ -9,6 +9,7 @@ import styles from './ColorButton.module.scss'
  * */
 type ColorComponentDisplayMode = 'show' | 'hide' | 'none' // TODO: implement
 type ColorComponentsDisplay =
+  | 'always'
   | 'hide-all-on-hover'
   | 'all-on-hover'
   | 'hide-individual-on-hover'
@@ -66,9 +67,10 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
         rgbValues[i] = 255
         return (
           <span
+            key={i}
             className={`${styles['color-component']} ${
-              styles[revealed && colorComponentsDisplay !== 'none' ? 'hide-all-on-hover' : colorComponentsDisplay]
-            }`} // TODO: force to 'hide-all-on-hover' if revealed?
+              styles[revealed && colorComponentsDisplay !== 'none' ? 'always' : colorComponentsDisplay]
+            }`}
             style={{ '--component-background-color': `rgba(${rgbValues.join(',')},${value / 255})` } as CSSProperties}>
             {component}
           </span>

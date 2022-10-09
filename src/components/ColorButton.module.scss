@@ -8,6 +8,7 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
+  &.always,
   &.hide-all-on-hover,
   .color-button:hover &.all-on-hover,
   &.individual-on-hover:hover,
