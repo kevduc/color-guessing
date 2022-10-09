@@ -65,13 +65,14 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
         const value = parseInt(component, 16)
         const rgbValues = [0, 0, 0]
         rgbValues[i] = 255
+        const backgroundColor = `rgba(${rgbValues.join(',')},${value / 255})`
         return (
           <span
             key={i}
             className={`${styles['color-component']} ${
               styles[revealed && colorComponentsDisplay !== 'none' ? 'always' : colorComponentsDisplay]
             }`}
-            style={{ '--component-background-color': `rgba(${rgbValues.join(',')},${value / 255})` } as CSSProperties}>
+            style={{ '--component-background-color': backgroundColor } as CSSProperties}>
             {component}
           </span>
         )
