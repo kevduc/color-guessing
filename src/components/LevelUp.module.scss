@@ -1,0 +1,86 @@
+.level-up {
+  position: absolute;
+  top: calc(20% + var(--adjustment));
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 2;
+
+  font-size: clamp(1rem, 10vw, 3rem);
+  font-family: monospace;
+
+  white-space: nowrap;
+
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px rgb(0 0 0 / 40%);
+
+  animation: 2500ms ease-in-out forwards appear;
+
+  &::after {
+    content: '⬆';
+    position: absolute;
+    animation: 400ms alternate infinite wiggle;
+  }
+
+  --adjustment: 60%;
+
+  @media (min-width: 768px) {
+    --adjustment: 0%;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    translate: 0 -25%;
+  }
+  100% {
+    translate: 0 7%;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  20% {
+    scale: 1.1;
+    opacity: 1;
+  }
+  30% {
+    scale: 1;
+    opacity: 1;
+  }
+  70% {
+    scale: 1;
+  }
+  85% {
+    scale: 1.1;
+    opacity: 1;
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+// @keyframes appear {
+//   0% {
+//     top: calc(25% + var(--adjustment));
+//     opacity: 0;
+//   }
+//   50% {
+//     top: calc(20% + var(--adjustment));
+//     scale: 1;
+//     opacity: 1;
+//   }
+//   70% {
+//     scale: 1;
+//   }
+//   85% {
+//     scale: 1.1;
+//     opacity: 1;
+//   }
+//   100% {
+//     scale: 0;
+//     opacity: 0;
+//   }
+// }

@@ -41,8 +41,6 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
 }) => {
   const colorComponents = color.match(/^#(\w\w)(\w\w)(\w\w)$/)?.slice(1, 4) ?? null
 
-  if (colorComponents === null) throw new Error(`${color} is not an hex color!`)
-
   return (
     <button
       className={`button ${styles['color-button']} ${styles[colorComponentsDisplay]} ${
@@ -61,7 +59,7 @@ const ColorButton: FunctionComponent<ColorButtonProps> = ({
       disabled={revealed}
       {...rest}>
       #
-      {colorComponents.map((component, i) => {
+      {colorComponents?.map((component, i) => {
         const value = parseInt(component, 16)
         const rgbValues = [0, 0, 0]
         rgbValues[i] = 255
