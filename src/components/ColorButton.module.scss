@@ -6,7 +6,7 @@
   &:not(.none) {
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 0.1em; // TODO: keep padding if not all components are none e.g.: .color-button:has(:not(&.none)) &.none
+    padding: 0.1em; // FEAT: keep padding if not all components are none e.g.: .color-button:has(:not(&.none)) &.none
   }
 
   &.always,

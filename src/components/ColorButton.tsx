@@ -7,7 +7,7 @@ import styles from './ColorButton.module.scss';
  * - hide: hide by default, and show on hover
  * - none: don't display at all
  * */
-type ColorComponentDisplayMode = 'show' | 'hide' | 'none'; // TODO: implement
+type ColorComponentDisplayMode = 'show' | 'hide' | 'none'; // FEAT: implement
 type ColorComponentsDisplay =
   | 'always'
   | 'hide-all-on-hover'
@@ -15,10 +15,10 @@ type ColorComponentsDisplay =
   | 'hide-individual-on-hover'
   | 'individual-on-hover'
   | 'none'
-  | 'show-random-2' // TODO: implement
-  | 'show-random-1' // TODO: implement
-  | 'hide-random-2' // TODO: implement
-  | 'hide-random-1'; // TODO: implement
+  | 'show-random-2' // FEAT: implement
+  | 'show-random-1' // FEAT: implement
+  | 'hide-random-2' // FEAT: implement
+  | 'hide-random-1'; // FEAT: implement
 
 interface ColorButtonProps {
   onClick: (color: HexColor) => void;
