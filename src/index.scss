@@ -41,6 +41,7 @@ body,
   display: grid;
   place-items: center;
   padding: 5vw;
+  overflow: hidden;
 
   @media (max-width: 767px) {
     padding-bottom: 0;

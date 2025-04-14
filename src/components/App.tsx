@@ -10,21 +10,6 @@ import TutorialInfo from '@/components/TutorialInfo';
 import type { HexColor } from '@/utils';
 import { randomColors, randomInt } from '@/utils';
 
-function App() {
-  const [colorChoices, setColorChoices] = useState<HexColor[] | null>(null);
-  const [trueColorId, setTrueColorId] = useState<number | null>(null);
-
-  const [userColorAnswer, setUserColorAnswer] = useState<HexColor | null>(null);
-
-  const [score, setScore] = useState<number>(0);
-
-  const [canGoToNextColorQuestion, setCanGoToNextColorQuestion] = useState<boolean>(false);
-
-  const colorDisplayRef = useRef<HTMLElement>(null);
-
-  const trueColor = colorChoices !== null && trueColorId !== null ? colorChoices[trueColorId] : null;
-  const revealed = userColorAnswer !== null;
-
 const getNumChoicesBasedOnScore = (score: number): number =>
   score < 5 ? 2 : score < 20 ? 3 : Math.min(2 + Math.floor(score / 10), 8);
 const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDisplay =>
@@ -34,9 +19,23 @@ const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDi
 // FEAT: add instructions when behavior changes (e.g. on tactile: long press on button to reveal colors)
 // FEAT: add sound effects
 
+function App() {
+  const [colorChoices, setColorChoices] = useState<HexColor[] | null>(null);
+  const [trueColorId, setTrueColorId] = useState<number | null>(null);
+  const trueColor = colorChoices !== null && trueColorId !== null ? colorChoices[trueColorId] : null; // FIXME: this should be named `trueColorIndex`
+
+  const [userColorAnswer, setUserColorAnswer] = useState<HexColor | null>(null); // FIXME: this should be an index, `pickedColorIndex`
+  const revealed = userColorAnswer !== null;
+
+  const [score, setScore] = useState<number>(0);
+
+  const [canGoToNextColorQuestion, setCanGoToNextColorQuestion] = useState<boolean>(false);
+
+  const colorDisplayRef = useRef<HTMLElement>(null);
+
   const [colorComponentsDisplay, setColorComponentsDisplay] = useState<ColorComponentsDisplay>(
     getColorComponentsDisplayBasedOnScore(score)
-  );
+  ); // FIXME: rename to `colorComponentsDisplayMode`
 
   const newColorQuestion = (numChoices: number) => {
     setUserColorAnswer(null);
@@ -44,10 +43,15 @@ const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDi
     setTrueColorId(score === 0 ? 1 : randomInt(0, numChoices - 1));
   };
 
-  useEffect(() => newColorQuestion(getNumChoicesBasedOnScore(score)), []);
-
   useEffect(() => {
-    const requestFullscreen = () => document.documentElement.requestFullscreen();
+    newColorQuestion(getNumChoicesBasedOnScore(score));
+  }, []);
+
+  // TODO: extract into hook, e.g. `useFullscreenToggleOnDoubleClick`
+  useEffect(() => {
+    const requestFullscreen = () => {
+      document.documentElement.requestFullscreen();
+    };
     document.addEventListener('dblclick', requestFullscreen);
     return () => {
       document.removeEventListener('dblclick', requestFullscreen);
@@ -59,21 +63,23 @@ const getColorComponentsDisplayBasedOnScore = (score: number): ColorComponentsDi
 
     if (color === trueColor) {
       newScore++;
-      setScore((score) => score + 1);
+      setScore(newScore);
     }
 
     setUserColorAnswer(color);
 
     // allow next color question after timeout
     setTimeout(() => {
+      // FIXME: canGoToNextColorQuestion should be derived from `userColorAnswer !== null`, but delayed (e.g. useDebouce)
       setCanGoToNextColorQuestion(true);
       const nextColor = () => {
         setCanGoToNextColorQuestion(false);
-        colorDisplayRef.current?.removeEventListener<'click'>('click', nextColor);
+        colorDisplayRef.current?.removeEventListener('click', nextColor);
         setColorComponentsDisplay(getColorComponentsDisplayBasedOnScore(newScore));
         newColorQuestion(getNumChoicesBasedOnScore(newScore));
       };
-      colorDisplayRef.current?.addEventListener<'click'>('click', nextColor);
+      // FIXME: add onClick callback to color display element when canGoToNextColorQuestion is true instead
+      colorDisplayRef.current?.addEventListener('click', nextColor);
     }, 600);
   };
 
