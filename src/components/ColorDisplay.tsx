@@ -1,9 +1,9 @@
-import { forwardRef, FunctionComponent } from 'react'
-import styles from './ColorDisplay.module.scss'
+import { forwardRef, FunctionComponent } from 'react';
+import styles from './ColorDisplay.module.scss';
 
 interface ColorDisplayProps {
-  color: string | null
-  [key: string]: any
+  color: string | null;
+  [key: string]: any;
 }
 
 const ColorDisplay: FunctionComponent<ColorDisplayProps> = forwardRef<HTMLDivElement, ColorDisplayProps>(
@@ -12,8 +12,8 @@ const ColorDisplay: FunctionComponent<ColorDisplayProps> = forwardRef<HTMLDivEle
       <div ref={ref} className={styles.display} style={{ backgroundColor: color ?? 'transparent' }} {...rest}>
         {children}
       </div>
-    )
+    );
   }
-)
+);
 
-export default ColorDisplay
+export default ColorDisplay;
